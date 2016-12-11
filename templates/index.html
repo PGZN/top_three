@@ -5,14 +5,25 @@
 	<body>
 		<div class="jumbotron">
 			<div class="container">
-				{% if forecast %}
-					<h1>{{ forecast }}</h1>
+				{% if recommendations %}
+					<div class = "container">
+						<h1>Here are the 3 best places for {{ terms }} in {{ address }}: </h1>
+					</div>
+					{% for rec in recommendations %}
+						<div class="container">
+							<h2>{% print rec['name'] %}</h2>
+							<p>{% print rec['phone'] %}</p>
+						</div>
+					{% endfor %}
 					<a href="{{ url_for('index') }}">Check another address</a>
 				{% else %}
 					<h1>Whuddup? What address do you want to check?</h1>
 					<form action="/" class="form-inline">
 						<div class="form-group">
 							<input type="text" name="address" class="form-control" placeholder="Enter address">
+						</div>
+						<div class="form-group">
+							<input type="text" name="terms" class="form-control" placeholder="What are you looking for? ">
 						</div>
 						<input type="submit" value="Submit" class="btn btn-primary">
 					</form>
